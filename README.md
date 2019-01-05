@@ -4,7 +4,7 @@ functions.
 
 #### Configuration
 
-##### AWS credectials
+##### AWS credentials
 Please refer to the [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html)
 documentation on configuring your aws credentials. Best option when working with lambdev is to store your credentials
 (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) and region (`AWS_DEFAULT_REGION`) as environment variables.
