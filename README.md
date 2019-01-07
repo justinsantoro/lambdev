@@ -1,10 +1,13 @@
 # lambdev
-A wrapper around a boto3 lambda client, lambdev automates the process of deploying, testing, and versioning AWS lambda
+A wrapper around a boto3 lambda client, lambdev helps automate the process of deploying, testing, and versioning AWS lambda
 functions.
 
-#### Configuration
+## Installation
+```pip install lambdev```
 
-##### AWS credentials
+## Configuration
+
+##### AWS credectials
 Please refer to the [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html)
 documentation on configuring your aws credentials. Best option when working with lambdev is to store your credentials
 (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) and region (`AWS_DEFAULT_REGION`) as environment variables.
