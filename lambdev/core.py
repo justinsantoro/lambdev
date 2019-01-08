@@ -1,9 +1,10 @@
 import boto3
-import cStringIO
 import zipfile
 from os import listdir, getcwd, sep
 from os.path import isfile, join, basename
+from io import BytesIO
 
+ 
 l = boto3.client('lambda')
 files = []
 dirs = []
@@ -27,7 +28,7 @@ def import_ignore():
 def sort():
     global workingDir, files, dirs
     names = listdir(workingDir)
-    print(names)
+    #print(names)
     for name in names:
         if name[0] == '.' or name in ignore or name[-3:] == 'pyc':
             pass
@@ -37,8 +38,8 @@ def sort():
                 print(workingDir+name)
             else:
                 dirs.append(workingDir+name+sep)
-    print(dirs)
-    print(files)
+    #print(dirs)
+    #print(files)
 
 
 # loop until all recursive files are added to files list
@@ -51,7 +52,7 @@ def get_recursive():
 
 
 def zipit():
-    buf = cStringIO.StringIO()
+    buf = BytesIO()
     with zipfile.ZipFile(buf, 'w') as ziph:
         for f in files:
             ziph.write(f, basename(f))

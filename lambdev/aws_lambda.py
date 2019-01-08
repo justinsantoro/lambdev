@@ -1,7 +1,7 @@
 import base64
 import json
 
-import core
+from . import core
 
 l = core.l
 
