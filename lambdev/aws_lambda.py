@@ -9,13 +9,13 @@ l = core.l
 # Publish function from $Latest. If desired alias already exists, update its version. If not, create it.
 # Assumes that the latest version of code is already in $latest via the test.py script
 def publish(alias, description=''):
-    fn = core.getFunctionName()
+    fn = core.get_function_name()
 
     pubresponse = l.publish_version(FunctionName=fn)
 
     if core.alias_exists(l.list_aliases(FunctionName=fn), alias):
         print('alias exists...updating version')
-        aliasresponse = l.update_alias(FunctionName=core.getFunctionName(),
+        aliasresponse = l.update_alias(FunctionName=core.get_function_name(),
                                        Name=alias,
                                        FunctionVersion=pubresponse['Version'])
         print('alias %s updated to version %s' % (aliasresponse['Name'],
@@ -31,13 +31,10 @@ def publish(alias, description=''):
 def test(test_object):
     core.upload_dir()
 
-    response = l.invoke(FunctionName=core.getFunctionName(), InvocationType='RequestResponse',
-                                   LogType='Tail', Payload=json.dumps(test_object))
+    response = l.invoke(FunctionName=core.get_function_name(), InvocationType='RequestResponse',
+                        LogType='Tail', Payload=json.dumps(test_object))
 
-    print('VERSION %s' % (response['ExecutedVersion']))
-    print(
-        '''log:
-            %s''' % base64.b64decode(response['LogResult']))
+    print(u'LOG:\n{}'.format(base64.b64decode(response['LogResult']).decode('utf-8')))
 
     if 'functionError' in response:
         raise(Exception('~~FUNCTION ERROR~~'))

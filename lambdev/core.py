@@ -12,9 +12,16 @@ ignore = []
 workingDir = getcwd() + sep
 
 
-def getFunctionName():
-    with open(workingDir + 'function_name.txt') as f:
-        return [line.rstrip('\n').rstrip('\r') for line in f][0]
+class FunctionNameError(Exception):
+    pass
+
+
+def get_function_name():
+    try:
+        with open(workingDir + 'function_name.txt') as f:
+            return [line.rstrip('\n').rstrip('\r') for line in f][0]
+    except FileNotFoundError:
+        raise(FunctionNameError('No function_name.txt. Does the lambda function exist?'))
 
 
 def import_ignore():
@@ -62,7 +69,7 @@ def zipit():
 
 def upload_file(z):
     l.update_function_code(
-        FunctionName=getFunctionName(),
+        FunctionName=get_function_name(),
         ZipFile=z
     )
 
