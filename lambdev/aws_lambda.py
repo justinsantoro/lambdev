@@ -38,9 +38,9 @@ def test(test_object):
     print(u'LOG:\n{}'.format(base64.b64decode(response['LogResult']).decode('utf-8')))
 
     if 'functionError' in response:
-        raise(Exception('~~FUNCTION ERROR~~'))
+        raise(Exception('~~FUNCTION ERROR~~ {}'.format(json.loads(response['payload'].read().decode('utf-8')))))
     else:
-        print('SUCCESS:')
+        return json.loads(response['Payload'].read().decode('utf-8'))
 
 
 def create_function(function_name=None, role=None, handler=None, description=None, runtime='python3.7'):
