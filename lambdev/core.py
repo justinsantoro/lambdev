@@ -91,6 +91,6 @@ def upload_package():
 
 def alias_exists(alias_response, desired):
     for alias in alias_response['Aliases']:
-        if alias['Name'] is desired:
+        if alias['Name'] == desired:
             return True
     return False
