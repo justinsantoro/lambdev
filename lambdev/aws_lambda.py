@@ -31,6 +31,7 @@ def publish(alias, description=''):
 def test(test_object):
     core.upload_package()
 
+    print("- Testing...")
     response = l.invoke(FunctionName=core.get_function_name(), InvocationType='RequestResponse',
                         LogType='Tail', Payload=json.dumps(test_object))
 
