@@ -29,7 +29,7 @@ def publish(alias, description=''):
 
 
 def test(test_object):
-    core.upload_dir()
+    core.upload_package()
 
     response = l.invoke(FunctionName=core.get_function_name(), InvocationType='RequestResponse',
                         LogType='Tail', Payload=json.dumps(test_object))
@@ -43,11 +43,12 @@ def test(test_object):
 
 
 def create_function(function_name=None, role=None, handler=None, description=None, runtime='python3.7'):
+    x = core.ProjectFolder(core.workingDir)
     response = l.create_function(FunctionName=function_name,
                                  Runtime=runtime,
                                  Role=role,
                                  Handler=handler,
-                                 Code={'ZipFile': core.build_zip()},
+                                 Code={'ZipFile': x.build_zip()},
                                  Description=description,
                                  Publish=False
                                  )
