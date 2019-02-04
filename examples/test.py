@@ -34,4 +34,13 @@ testObject = {
 
 
 if __name__ == '__main__':
-    lambdev.test(testObject)
+    try:
+        response = lambdev.test(testObject)
+        # print response returned by lambda function
+        print(response)
+    except lambdev.aws_lambda.core.FunctionNameError:
+        # create the function if function_name.txt does not exist then run test
+        print('CREATING NEW FUNCTION')
+        import create_function
+        create_function.main()
+        lambdev.test(testObject)
