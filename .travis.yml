@@ -1,0 +1,17 @@
+language: python
+python: 3.6
+
+before_install:
+  - chmod +x ./build.sh
+
+script:
+  - ./build.sh
+
+deploy:
+  provider: pypi
+  user: jzsantoro
+  password:
+    secure: mfAI6ddynJHeTN6v4AMcBZOZm3QOlPhANNdhe+Md34K1C18LB3wyQSrkOovqECXgZRfWG/hVdEk6FjJTEpu6i+kjv+cTEdDQP0a+7W76lZzucwc0dLImS+T5bcuP7uONUWyDmfpzY9s9hVK/DiK4nr113TapGptnomfT/qVTaSCiex5nGhLPTDacdXK9P6Um9DPe8Emir9iyITmbiIu+8krp+P7C5Ab9cqd87x9iyMJsoshmHWNqOSHNh+6ENkMG+zq0vD3RbloDKxwMcOhhd9ez58zVMJK9LqQBGv17ObpZlkhfkCAStblgOwq7zt7y4+ENo0gkvnWwz8PWwzbKCRD3a8YO0ToNB+TwRIcH59GHF3psCWAToqniy2gHXNVeahH7rGl0wbvnBCEzLStCshr+wAB8agyIWdJ4q1zcE1F0nS2MvjUS35HyvIPEl26/aA4YdgOb4QPRzC5y+TzO7WU0YoWexlps4XAUx89yooRLniXZ1itbQARjAt2I67M0U7XSEFOqXAduLmH+793V8eJ2GULm+jtlUwxpWq04fzgM01HoOs9grfiK50aS/syr2/02XUS0eexHIj5Gn87eQEGqqj2euqVxoWnl+FQyZaG79R61ekOT3jI0tCC250dQGSR46DDs5O8vxKWksZVvQYll+pajlPD/n8EiAPfqMtg=
+  distributions: sdist bdist_wheel
+  on:
+    branch: master

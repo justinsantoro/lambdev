@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="lambdev",
-    version="0.1.0",
+    version="0.1.1",
     author="Justin Santoro",
     author_email="jzsantoro14@gmail.com",
     description="A small package that simplifies developing AWS Lambda functions locally",
@@ -15,8 +15,17 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=['boto3'],
     classifiers=[
-        "Programming Language :: Python :: 2",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
+        'Intended Audience :: Developers',
+        'Natural Language :: English',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
 )
