@@ -1,6 +1,6 @@
 # lambdev
-A wrapper around a boto3 lambda client, lambdev helps automate the process of deploying, testing, and versioning AWS lambda
-functions.
+A simple interface wrapped around a boto3 lambda client, lambdev simplifies testing, deploying and versioning AWS lambda
+functions from your local development environment.
 
 ## Installation
 ```pip install lambdev```
