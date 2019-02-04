@@ -8,6 +8,7 @@ from io import BytesIO
  
 l = boto3.client('lambda')
 workingDir = getcwd() + sep
+workingDir = workingDir.replace('\\', '/')
 
 
 class FunctionNameError(Exception):
@@ -53,7 +54,7 @@ class ProjectFolder(object):
     def _zipit(self):
         global workingDir
         buf = BytesIO()
-        p = re.compile(r'\\{}\\'.format(workingDir.split('\\')[-2]))
+        p = re.compile(r'/{}/'.format(workingDir.split('/')[-2]))
         with zipfile.ZipFile(buf, 'w') as ziph:
             for f in self.files:
                 ziph.write(f, f[p.search(f).end():])
