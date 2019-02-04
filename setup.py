@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="lambdev",
-    version="0.1.1",
+    version="0.1.2",
     author="Justin Santoro",
     author_email="jzsantoro14@gmail.com",
     description="A small package that simplifies developing AWS Lambda functions locally",
