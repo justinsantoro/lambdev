@@ -6,6 +6,10 @@ from . import core
 l = core.l
 
 
+class LambdaError(Exception):
+    pass
+
+
 # Publish function from $Latest. If desired alias already exists, update its version. If not, create it.
 # Assumes by default that the latest version of code is already in $latest via lambdev.test()
 def publish(alias, description='', upload=False):
@@ -31,17 +35,22 @@ def publish(alias, description='', upload=False):
                        Description=description)
 
 
-def test(test_object):
+def test(test_object, print_log=False):
     core.upload_package()
 
     print("- Testing...")
     response = l.invoke(FunctionName=core.get_function_name(), InvocationType='RequestResponse',
                         LogType='Tail', Payload=json.dumps(test_object))
 
-    print(u'- Function log:\n{}'.format(base64.b64decode(response['LogResult']).decode('utf-8')))
+    if print_log:
+        print(u'- Function log:\n{}'.format(base64.b64decode(response['LogResult']).decode('utf-8')))
 
-    if 'functionError' in response:
-        raise(Exception('~~FUNCTION ERROR~~ {}'.format(json.loads(response['payload'].read().decode('utf-8')))))
+    if 'FunctionError' in response:
+        message = response['Payload'].read().decode('utf-8')
+        if response['FunctionError'] == 'Handled':
+            raise RuntimeError(message)
+        else:
+            raise LambdaError(message)
     else:
         return json.loads(response['Payload'].read().decode('utf-8'))
 
