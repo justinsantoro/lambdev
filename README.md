@@ -1,5 +1,7 @@
-# lambdev
-A simple interface wrapped around a boto3 lambda client, lambdev simplifies testing, deploying and versioning AWS lambda
+# lambdev ![](https://img.shields.io/travis/justinsantoro/lambdev.svg?style=flat-square) ![](https://img.shields.io/pypi/v/lambdev.svg?style=flat-square)
+
+
+A simple interface wrapped around a boto3 lambda client, lambdev simplifies testing, deploying, and versioning AWS lambda
 functions from your local development environment.
 
 ## Installation
@@ -7,7 +9,7 @@ functions from your local development environment.
 
 ## Configuration
 
-##### AWS credectials
+##### AWS credentials
 Please refer to the [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html)
 documentation on configuring your aws credentials. Best option when working with lambdev is to store your credentials
 (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) and region (`AWS_DEFAULT_REGION`) as environment variables.
