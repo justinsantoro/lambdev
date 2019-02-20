@@ -1,5 +1,6 @@
 import base64
 import json
+import unittest
 
 from . import core
 
@@ -8,6 +9,21 @@ l = core.l
 
 class LambdaError(Exception):
     pass
+
+
+class LambdaTestFunction(unittest.TestCase):
+    EXPECTED_RESPONSE = None
+    TEST_OBJECT = None
+
+    def test_function(self):
+        self.assertEqual(run(payload=LambdaTestFunction.TEST_OBJECT, print_log=False), LambdaTestFunction.EXPECTED_RESPONSE)
+
+
+def test(expected_response, test_object=None):
+    print("- Testing...")
+    LambdaTestFunction.EXPECTED_RESPONSE = expected_response
+    LambdaTestFunction.TEST_OBJECT = test_object
+    unittest.main()
 
 
 # Publish function from $Latest. If desired alias already exists, update its version. If not, create it.
@@ -35,12 +51,17 @@ def publish(alias, description='', upload=False):
                        Description=description)
 
 
-def test(test_object, print_log=False):
-    core.upload_package()
+def run(function_name=None, payload=None, print_log=True):
+    if not function_name:
+        function_name = core.get_function_name()
+        core.upload_package()
 
-    print("- Testing...")
-    response = l.invoke(FunctionName=core.get_function_name(), InvocationType='RequestResponse',
-                        LogType='Tail', Payload=json.dumps(test_object))
+    print("- Running {}...".format(function_name))
+    response = l.invoke(FunctionName=function_name,
+                        Payload=json.dumps(payload) if payload else None,
+                        InvocationType='RequestResponse',
+                        LogType='Tail' if print_log else 'None'
+                        )
 
     if print_log:
         print(u'- Function log:\n{}'.format(base64.b64decode(response['LogResult']).decode('utf-8')))
