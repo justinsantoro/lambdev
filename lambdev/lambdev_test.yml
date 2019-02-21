@@ -1,0 +1,18 @@
+#a list of test objects to run
+  # expected response from function to be tested against
+- Expected: {'status': 200}
+  # input object for function test OPTIONAL
+  Input: {'test': 'test'}
+  # lambda function to test
+  Function: function_name_to_test
+# order of lambda functions and scripts to run to setup test
+  Setup:
+    - type: lamda
+      name: required_setup_function_name
+      request_response: false
+    - type: script
+      path: /path/to/setup/script
+  # steps to teardown test
+  Teardown:
+    - type: script
+      path: /path/to/teardown/script
